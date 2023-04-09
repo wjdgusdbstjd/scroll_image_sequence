@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <p id="time">time</p>
+
+    <div class="container">
+        <img id="img">
+    </div>
+
+    <!------------------------------------------------------------------------------------------>
+    <script>
+        let dayArray = ["일", "월", "화", "수", "목", "금", "토"];
+        let myDate;
+        let year;
+        let month;
+        let date;
+        let day;
+        let hour;
+        let minute;
+        let second;
+        //2023년 4월 3일 월요일 15시 30분
+        //디데이, 99일째 등등..
+
+        setInterval(function () {
+            //console.log("hi"); //1초마다 hi가 콘솔창에 출력됨
+            //console.log(num++); //1초마다 num에 선언해준 0부터 1씩 증가해준다
+            //console.log(myDate.getFullYear);
+            //document.getElementById("time").innerText = myDate;
+            myDate = new Date();
+            year = myDate.getFullYear() + "년 ";
+            month = (myDate.getMonth() + 1) + "월 ";
+            date = myDate.getDate() + "일 ";
+            day = dayArray[myDate.getDay()] + "요일 ";
+            hour = myDate.getHours() + ":";
+            minute = myDate.getMinutes() + " ";
+            second = myDate.getSeconds() + "초";
+            //document.getElementById("time").innerText = myDate.getFullYear() + "년" + (myDate.getMonth() + 1) + "월"; //1월을 0으로 봄 2월은 1, 3월 은 4 이기 때문ㅇ 1을 더해줌
+            document.getElementById("time").innerText = year + month + date + day + hour + minute + second; //1월을 0으로 봄 2월은 1, 3월 은 4 이기 때문ㅇ 1을 더해줌
+        }, 1000);
+
+
+        const element = document.getElementById("img");
+        const totalNum = 90;
+        let frame = 0;
+        let height
+        element.setAttribute("src", "./Comp 1/Comp 1_0.png");
+        window.addEventListener("scroll", function () {
+            height = Math.floor(window.scrollY / (document.body.clientHeight - window.innerHeight) * 100);
+            frame = Math.floor(totalNum * height / 100);
+            element.setAttribute("src", "./Comp 1/Comp 1_" + frame + ".png");
+        });
+
+
+
+        // 예시: 현재 날짜와 2023년 5월 31일 사이의 시간 차이 계산
+        const now = new Date();
+        const futureDate = new Date('2023-12-31');
+        let timeDiff = futureDate.getTime() - now.getTime();
+        // 시간 차이를 일 단위로 변환
+        let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        // 새로운 div 요소 만들기
+        var newDiv1 = document.createElement("div");
+        var newDiv2 = document.createElement("div");
+        // div에 텍스트 추가하기
+        newDiv1.id = "count1";
+        newDiv2.id = "count2";
+        var divText1 = document.createTextNode("D+" + (100 - daysDiff));
+        var divText2 = document.createTextNode("D-" + (daysDiff));
+        newDiv1.appendChild(divText1);
+        newDiv2.appendChild(divText2);
+        // body 요소에 새로운 div 추가하기
+        document.body.appendChild(newDiv1);
+        document.body.appendChild(newDiv2);
+    </script>
+</body>
+
+</html>
